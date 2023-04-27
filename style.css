@@ -1,0 +1,54 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    flex: none;
+}
+
+button {
+    font-size: 60px;
+    width: 25%;
+    text-align: center;
+}
+
+.row {
+    display: flex;
+    gap: 7px;
+    justify-content: space-between;
+}
+
+#calc-container {
+    width: 28%;
+    display: flex;
+    flex-direction: column;
+    border: solid 2px black;
+    gap: 7px;
+    padding: 12px;
+}
+
+#calc-display {
+    border: solid 2px black;
+    padding: 8px 10px 8px 10px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 8px;
+}
+
+#display-text {
+    text-align: right;
+    font-size: 72px;
+}
+
+#equals-btn {
+    width: 50%;
+}
+
+#ac-btn, #plus-minus-btn, #percent-btn, #multiply-btn{
+    font-size: 50px;
+}
