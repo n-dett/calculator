@@ -29,3 +29,32 @@ function divide(num1, num2) {
   return num1 / num2;
 }
 
+
+// Populate display
+// let displayValue
+let displayText = document.querySelector('#display-text');
+let numBtns = document.querySelectorAll('.num-btn');
+
+function selectedNum() {
+  numBtns.forEach(numBtn => {
+    numBtn.addEventListener('click', insertDisplayText)
+  })
+}
+
+function insertDisplayText() {
+  if(displayText.innerText == '0'){
+    displayText.innerText = '';
+  }
+  displayText.innerText += this.value;
+}
+
+selectedNum();
+
+
+// All clear button
+function allClear() {
+  let acBtn = document.querySelector('#ac-btn');
+  acBtn.addEventListener('click', () => displayText.innerText = '0')
+}
+
+allClear();
