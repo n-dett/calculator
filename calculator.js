@@ -7,33 +7,30 @@ function operate(num1, num2, callback) {
     return callback(num1, num2);
 }
 
-// Create functions for add, subtract, multiply, and divide
+// Create functions for each of the operations
 
-// Add
 function add(num1, num2) {
   return num1 + num2;
 }
 
-// Subtract
 function subtract(num1, num2) {
   return num1 - num2;
 }
 
-// Multiply
 function multiply(num1, num2) {
   return num1 * num2;
 }
 
-// Divide
 function divide(num1, num2) {
   return num1 / num2;
 }
 
 
 // Populate display
-// let displayValue
+
 let displayText = document.querySelector('#display-text');
 let numBtns = document.querySelectorAll('.num-btn');
+let displayValue = 0;
 
 function selectedNum() {
   numBtns.forEach(numBtn => {
@@ -46,9 +43,23 @@ function insertDisplayText() {
     displayText.innerText = '';
   }
   displayText.innerText += this.value;
+  updateDisplayValue();
 }
 
+function updateDisplayValue() {
+  displayValue = Number(displayText.innerText);
+  console.log(displayValue);
+}
+
+function maxTenNums() {
+  if(displayText.length > 9) {
+    numBtn.removeEventListener('click', insertDisplayText)
+  }
+}
+
+maxTenNums();
 selectedNum();
+
 
 
 // All clear button
