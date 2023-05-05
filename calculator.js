@@ -42,24 +42,19 @@ function insertDisplayText() {
   if(displayText.innerText == '0'){
     displayText.innerText = '';
   }
-  displayText.innerText += this.value;
+  if(displayText.innerText.length <= 9){
+    displayText.innerText += this.value;
+  }
   updateDisplayValue();
+  console.log(displayValue, 'Inside Function');
 }
 
 function updateDisplayValue() {
   displayValue = Number(displayText.innerText);
-  console.log(displayValue);
+  console.log(displayText.innerText.length); 
 }
 
-function maxTenNums() {
-  if(displayText.length > 9) {
-    numBtn.removeEventListener('click', insertDisplayText)
-  }
-}
-
-maxTenNums();
 selectedNum();
-
 
 
 // All clear button
