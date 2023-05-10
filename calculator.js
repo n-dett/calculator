@@ -1,36 +1,45 @@
-let firstNum
-let operator
+let firstNum 
 let secondNum
+let displayValue = 0;
+let currentOperator = '';
+let nextOperator = '';
+let total = 0;
 
-// Operation
-function operate(num1, num2, callback) {
+let operatorBtns = document.querySelectorAll('.operator');
+let displayText = document.querySelector('#display-text');
+let numBtns = document.querySelectorAll('.num-btn');
+
+selectedNum();
+allClear();
+operatorIsClicked();
+
+// Run calculation
+
+function calculate(num1, num2, callback) {
     return callback(num1, num2);
 }
 
+
 // Create functions for each of the operations
 
-function add(num1, num2) {
+function addNums(num1, num2) {
   return num1 + num2;
 }
 
-function subtract(num1, num2) {
+function subtractNums(num1, num2) {
   return num1 - num2;
 }
 
-function multiply(num1, num2) {
+function multiplyNums(num1, num2) {
   return num1 * num2;
 }
 
-function divide(num1, num2) {
+function divideNums(num1, num2) {
   return num1 / num2;
 }
 
 
 // Populate display
-
-let displayText = document.querySelector('#display-text');
-let numBtns = document.querySelectorAll('.num-btn');
-let displayValue = 0;
 
 function selectedNum() {
   numBtns.forEach(numBtn => {
@@ -39,28 +48,59 @@ function selectedNum() {
 }
 
 function insertDisplayText() {
-  if(displayText.innerText == '0'){
+  if(displayText.innerText == '0') {
     displayText.innerText = '';
   }
   if(displayText.innerText.length <= 9){
     displayText.innerText += this.value;
   }
   updateDisplayValue();
-  console.log(displayValue, 'Inside Function');
+  console.log(displayValue, 'display value');
 }
 
 function updateDisplayValue() {
   displayValue = Number(displayText.innerText);
-  console.log(displayText.innerText.length); 
 }
-
-selectedNum();
 
 
 // All clear button
+
 function allClear() {
   let acBtn = document.querySelector('#ac-btn');
   acBtn.addEventListener('click', () => displayText.innerText = '0')
+  displayValue = 0;
+  total = 0;
 }
 
-allClear();
+// Operation functionality
+function operatorIsClicked() {
+  operatorBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      assignNumberValues();
+    })
+  }) 
+
+  
+    }
+
+
+
+// Assign number values
+function assignNumberValues() {
+  if(!isNaN(firstNum)) {
+    secondNum = displayValue;
+  } else {
+    firstNum = displayValue;
+  }
+  console.log(firstNum, 'firstNum');
+  console.log(secondNum, 'secondNum');
+}
+
+
+
+// When operator is clicked, store first number and store operator
+// Enter second number
+// Operator/equals is clicked, store second number and calculate
+// previousOperator
+// currentOperator
+// if previousOperator == ' ' then currentOperator == this.value;
