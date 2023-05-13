@@ -4,6 +4,7 @@ let displayValue = 0;
 let currentOperator = '';
 let nextOperator = '';
 let total = 0;
+let clearDisplay = false;
 
 let operatorBtns = document.querySelectorAll('.operator');
 let displayText = document.querySelector('#display-text');
@@ -52,6 +53,10 @@ function insertDisplayText() {
     displayText.innerText = '';
   }
   if(displayText.innerText.length <= 9){
+    if(clearDisplay === true) {
+      displayText.innerText = '';
+      clearDisplay = false;
+    }
     displayText.innerText += this.value;
   }
   updateDisplayValue();
@@ -76,7 +81,10 @@ function allClear() {
 function operatorIsClicked() {
   operatorBtns.forEach(btn => {
     btn.addEventListener('click', () => {
+      currentOperator = btn.value;
+      console.log(currentOperator, 'currentOperator')
       assignNumberValues();
+      clearDisplay = true;
     })
   }) 
 
@@ -104,3 +112,6 @@ function assignNumberValues() {
 // previousOperator
 // currentOperator
 // if previousOperator == ' ' then currentOperator == this.value;
+
+// When operator is clicked, next numbers are not appended to current, display is cleared
+// if(firstNum)
