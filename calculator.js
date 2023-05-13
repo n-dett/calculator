@@ -1,7 +1,7 @@
 let firstNum 
 let secondNum
 let displayValue = 0;
-let currentOperator = '';
+// let currentOperator = '';
 let nextOperator = '';
 let total = 0;
 let clearDisplay = false;
@@ -79,17 +79,17 @@ function allClear() {
 
 // Operation functionality
 function operatorIsClicked() {
-  operatorBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      currentOperator = btn.value;
-      console.log(currentOperator, 'currentOperator')
+  let containerDiv = document.querySelector('#calc-container');
+  containerDiv.addEventListener('click', (e) => {
+    const target = e.target;
+    if(target.className === 'operator') {
+      let currentOperator = target.id;
+      console.log(currentOperator, 'currentOperator');
       assignNumberValues();
       clearDisplay = true;
-    })
-  }) 
-
-  
     }
+  })
+}
 
 
 
@@ -102,6 +102,13 @@ function assignNumberValues() {
   }
   console.log(firstNum, 'firstNum');
   console.log(secondNum, 'secondNum');
+}
+
+
+function assignOperatorValues() {
+  if(operator) {
+    nextOperator = btn.value;
+  }
 }
 
 
