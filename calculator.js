@@ -1,7 +1,7 @@
 let firstNum 
 let secondNum
 let displayValue = 0;
-// let currentOperator = '';
+let operator = '';
 let nextOperator = '';
 let total = 0;
 let clearDisplay = false;
@@ -83,9 +83,10 @@ function operatorIsClicked() {
   containerDiv.addEventListener('click', (e) => {
     const target = e.target;
     if(target.className === 'operator') {
-      let currentOperator = target.id;
-      console.log(currentOperator, 'currentOperator');
+      // let operator = target.id;
+      // console.log(operator, 'operator');
       assignNumberValues();
+      assignOperatorValues(target);
       clearDisplay = true;
     }
   })
@@ -105,10 +106,17 @@ function assignNumberValues() {
 }
 
 
-function assignOperatorValues() {
-  if(operator) {
-    nextOperator = btn.value;
+function assignOperatorValues(target) {
+  if(operator && nextOperator) {
+    operator = nextOperator;
+    nextOperator = target.id;
+  } else if(operator) {
+    nextOperator = target.id;
+  } else {
+    operator = target.id
   }
+  console.log(operator, 'operator');
+  console.log(nextOperator, 'nextOperator');
 }
 
 
