@@ -13,6 +13,7 @@ let numBtns = document.querySelectorAll('.num-btn');
 selectedNum();
 allClear();
 operatorIsClicked();
+equalsButtonIsClicked();
 
 // Run calculation
 
@@ -23,19 +24,19 @@ function calculate(num1, num2, callback) {
 
 // Create functions for each of the operations
 
-function addNums(num1, num2) {
+function add(num1, num2) {
   return num1 + num2;
 }
 
-function subtractNums(num1, num2) {
+function subtract(num1, num2) {
   return num1 - num2;
 }
 
-function multiplyNums(num1, num2) {
+function multiply(num1, num2) {
   return num1 * num2;
 }
 
-function divideNums(num1, num2) {
+function divide(num1, num2) {
   return num1 / num2;
 }
 
@@ -83,8 +84,6 @@ function operatorIsClicked() {
   containerDiv.addEventListener('click', (e) => {
     const target = e.target;
     if(target.className === 'operator') {
-      // let operator = target.id;
-      // console.log(operator, 'operator');
       assignNumberValues();
       assignOperatorValues(target);
       clearDisplay = true;
@@ -109,24 +108,38 @@ function assignNumberValues() {
 function assignOperatorValues(target) {
   if(operator && nextOperator) {
     operator = nextOperator;
-    nextOperator = target.id;
+    nextOperator = window [target.value];
   } else if(operator) {
-    nextOperator = target.id;
+    nextOperator = window[target.value];
   } else {
-    operator = target.id
+    operator = window[target.value];
   }
   console.log(operator, 'operator');
   console.log(nextOperator, 'nextOperator');
 }
 
 
+function equalsButtonIsClicked() {
+  const equalsbtn = document.querySelector('#equals-btn');
+  equalsbtn.addEventListener('click', () => {
+    assignNumberValues();
+    runEquation();
+    if(nextOperator) {
+      operator = nextOperator;
+    }
+    nextOperator = '';
+  })
+}
 
-// When operator is clicked, store first number and store operator
-// Enter second number
-// Operator/equals is clicked, store second number and calculate
-// previousOperator
-// currentOperator
-// if previousOperator == ' ' then currentOperator == this.value;
+function runEquation() {
+  total = calculate(firstNum, secondNum, operator);
+  console.log(total, 'total');
+  displayText.innerText = total;
+  firstNum = total;
+  secondNum = 0;
+}
 
-// When operator is clicked, next numbers are not appended to current, display is cleared
-// if(firstNum)
+
+
+// When two operators are clicked in a row (no number),
+// how to store only the second operator?
