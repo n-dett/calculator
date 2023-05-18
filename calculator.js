@@ -3,7 +3,7 @@ let secondNum
 let displayValue = 0;
 let operator = '';
 let nextOperator = '';
-let total = 0;
+let total;
 let clearDisplay = false;
 
 let operatorBtns = document.querySelectorAll('.operator');
@@ -13,7 +13,7 @@ let numBtns = document.querySelectorAll('.num-btn');
 selectedNum();
 allClear();
 operatorIsClicked();
-equalsButtonIsClicked();
+
 
 // Run calculation
 
@@ -73,9 +73,16 @@ function updateDisplayValue() {
 
 function allClear() {
   let acBtn = document.querySelector('#ac-btn');
-  acBtn.addEventListener('click', () => displayText.innerText = '0')
-  displayValue = 0;
-  total = 0;
+  acBtn.addEventListener('click', () => {
+    displayText.innerText = '0'
+    displayValue = 0;
+    total = 0;
+    firstNum = undefined;
+    secondNum = undefined;
+    operator = undefined;
+    nextOperator = undefined;
+  })
+ 
 }
 
 // Operation functionality
@@ -83,10 +90,15 @@ function operatorIsClicked() {
   let containerDiv = document.querySelector('#calc-container');
   containerDiv.addEventListener('click', (e) => {
     const target = e.target;
-    if(target.className === 'operator') {
+ if(target.className === 'operator') {
       assignNumberValues();
       assignOperatorValues(target);
       clearDisplay = true;
+
+      if(!isNaN(secondNum) && operator) {
+        runEquation();
+        assignNextOperator();
+      }                
     }
   })
 }
@@ -94,11 +106,24 @@ function operatorIsClicked() {
 
 
 // Assign number values
+// function assignNumberValues() {
+//   if(!isNaN(firstNum)) {
+//     secondNum = displayValue;
+//   } else {
+//     firstNum = displayValue;
+//   }
+//   console.log(firstNum, 'firstNum');
+//   console.log(secondNum, 'secondNum');
+// }
+
 function assignNumberValues() {
   if(!isNaN(firstNum)) {
     secondNum = displayValue;
   } else {
     firstNum = displayValue;
+  }
+  if(total) {
+    firstNum = total;
   }
   console.log(firstNum, 'firstNum');
   console.log(secondNum, 'secondNum');
@@ -106,7 +131,7 @@ function assignNumberValues() {
 
 
 function assignOperatorValues(target) {
-  if(operator && nextOperator) {
+  if(operator && nextOperator || total) {
     operator = nextOperator;
     nextOperator = window [target.value];
   } else if(operator) {
@@ -114,32 +139,32 @@ function assignOperatorValues(target) {
   } else {
     operator = window[target.value];
   }
+  
+  
   console.log(operator, 'operator');
   console.log(nextOperator, 'nextOperator');
 }
 
 
-function equalsButtonIsClicked() {
-  const equalsbtn = document.querySelector('#equals-btn');
-  equalsbtn.addEventListener('click', () => {
-    assignNumberValues();
-    runEquation();
-    if(nextOperator) {
-      operator = nextOperator;
-    }
-    nextOperator = '';
-  })
+function assignNextOperator() {
+  operator = nextOperator;
+  nextOperator = '';
 }
+
+
+
 
 function runEquation() {
   total = calculate(firstNum, secondNum, operator);
   console.log(total, 'total');
   displayText.innerText = total;
   firstNum = total;
-  secondNum = 0;
 }
 
 
+// TO DO
 
 // When two operators are clicked in a row (no number),
 // how to store only the second operator?
+
+// Change font size at different numbers of digits, add error if number gets too long
