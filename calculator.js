@@ -97,7 +97,7 @@ function operatorIsClicked() {
 
       if(!isNaN(secondNum) && operator) {
         runEquation();
-        assignNextOperator();
+        assignOperatorValues(target);
       }                
     }
   })
@@ -106,15 +106,6 @@ function operatorIsClicked() {
 
 
 // Assign number values
-// function assignNumberValues() {
-//   if(!isNaN(firstNum)) {
-//     secondNum = displayValue;
-//   } else {
-//     firstNum = displayValue;
-//   }
-//   console.log(firstNum, 'firstNum');
-//   console.log(secondNum, 'secondNum');
-// }
 
 function assignNumberValues() {
   if(!isNaN(firstNum)) {
@@ -131,7 +122,7 @@ function assignNumberValues() {
 
 
 function assignOperatorValues(target) {
-  if(operator && nextOperator || total) {
+  if(total) {
     operator = nextOperator;
     nextOperator = window [target.value];
   } else if(operator) {
@@ -144,14 +135,6 @@ function assignOperatorValues(target) {
   console.log(operator, 'operator');
   console.log(nextOperator, 'nextOperator');
 }
-
-
-function assignNextOperator() {
-  operator = nextOperator;
-  nextOperator = '';
-}
-
-
 
 
 function runEquation() {
