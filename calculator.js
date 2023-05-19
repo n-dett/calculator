@@ -122,16 +122,17 @@ function assignNumberValues() {
 
 
 function assignOperatorValues(target) {
-  if(total) {
-    operator = nextOperator;
-    nextOperator = window [target.value];
+  if(target.id == 'equals-btn') {
+    return;
+  } else if(total) {
+      operator = nextOperator;
+      nextOperator = window [target.value];
   } else if(operator) {
-    nextOperator = window[target.value];
+      nextOperator = window[target.value];
   } else {
-    operator = window[target.value];
+      operator = window[target.value];
   }
-  
-  
+
   console.log(operator, 'operator');
   console.log(nextOperator, 'nextOperator');
 }
@@ -143,6 +144,7 @@ function runEquation() {
   displayText.innerText = total;
   firstNum = total;
 }
+
 
 
 // TO DO
