@@ -5,6 +5,7 @@ let operator = '';
 let nextOperator = '';
 let total;
 let clearDisplay = false;
+let isEqualsClicked = false;
 
 let operatorBtns = document.querySelectorAll('.operator');
 let displayText = document.querySelector('#display-text');
@@ -13,6 +14,7 @@ let numBtns = document.querySelectorAll('.num-btn');
 selectedNum();
 allClear();
 operatorIsClicked();
+// equalsBtnClick();
 
 
 // Run calculation
@@ -94,13 +96,14 @@ function operatorIsClicked() {
       assignNumberValues();
       assignOperatorValues(target);
       clearDisplay = true;
-
+//////////////////////////// Need to edit this
       if(!isNaN(secondNum) && operator) {
         runEquation();
-        assignOperatorValues(target);
+        // assignOperatorValues(target);
+        }
       }                
     }
-  })
+  )
 }
 
 
@@ -122,16 +125,11 @@ function assignNumberValues() {
 
 
 function assignOperatorValues(target) {
-  if(target.id == 'equals-btn') {
-    return;
-  } else if(total) {
       operator = nextOperator;
-      nextOperator = window [target.value];
-  } else if(operator) {
       nextOperator = window[target.value];
-  } else {
-      operator = window[target.value];
-  }
+  
+  
+// Operator = nextOperator, unless operator and nextOperator are undefined
 
   console.log(operator, 'operator');
   console.log(nextOperator, 'nextOperator');
@@ -145,11 +143,15 @@ function runEquation() {
   firstNum = total;
 }
 
-
+function equalsBtnClick() {
+  let equalsBtn = document.querySelector('#equals-btn');
+  equalsBtn.addEventListener('click', () => isEqualsClicked = true)
+}
 
 // TO DO
+// Make equation run if equals is clicked more than once
 
 // When two operators are clicked in a row (no number),
-// how to store only the second operator?
+// how to store only the second operator? (firstNum is being stored as secondNum currently)
 
 // Change font size at different numbers of digits, add error if number gets too long
