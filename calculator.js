@@ -5,7 +5,8 @@ let operator = '';
 let nextOperator = '';
 let total;
 let clearDisplay = false;
-let isEqualsClicked = false;
+let operatorClicked = false;
+// let isEqualsClicked = false;
 
 let operatorBtns = document.querySelectorAll('.operator');
 let displayText = document.querySelector('#display-text');
@@ -20,7 +21,8 @@ operatorIsClicked();
 // Run calculation
 
 function calculate(num1, num2, callback) {
-    return callback(num1, num2);
+  return callback(num1, num2);
+  
 }
 
 
@@ -63,6 +65,7 @@ function insertDisplayText() {
     displayText.innerText += this.value;
   }
   updateDisplayValue();
+  operatorClicked = false;
   console.log(displayValue, 'display value');
 }
 
@@ -92,24 +95,28 @@ function operatorIsClicked() {
   let containerDiv = document.querySelector('#calc-container');
   containerDiv.addEventListener('click', (e) => {
     const target = e.target;
- if(target.className === 'operator') {
-      assignNumberValues();
-      assignOperatorValues(target);
-      clearDisplay = true;
-//////////////////////////// Need to edit this
-      if(!isNaN(secondNum) && operator) {
-        runEquation();
-        // assignOperatorValues(target);
-        }
-      }                
-    }
-  )
+    if(target.className === 'operator') {
+      if(operatorClicked) {
+        assignOperatorValues(target);
+        return;
+      } else {
+        assignNumberValues();
+        assignOperatorValues(target);
+        clearDisplay = true;
+        operatorClicked = true;
+
+          if(!isNaN(secondNum) && operator) {
+            runEquation(); 
+          }
+      }
+    }                
+  })
 }
 
 
 
 // Assign number values
-
+// EDIT THIS ///////////////////////////////////////
 function assignNumberValues() {
   if(!isNaN(firstNum)) {
     secondNum = displayValue;
@@ -143,13 +150,17 @@ function runEquation() {
   firstNum = total;
 }
 
-function equalsBtnClick() {
-  let equalsBtn = document.querySelector('#equals-btn');
-  equalsBtn.addEventListener('click', () => isEqualsClicked = true)
-}
+
+
+// function equalsBtnClick() {
+//   let equalsBtn = document.querySelector('#equals-btn');
+//   equalsBtn.addEventListener('click', () => isEqualsClicked = true)
+// }
 
 // TO DO
 // Make equation run if equals is clicked more than once
+
+// Allow negative numbers
 
 // When two operators are clicked in a row (no number),
 // how to store only the second operator? (firstNum is being stored as secondNum currently)
