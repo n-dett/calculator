@@ -6,7 +6,7 @@ let nextOperator = '';
 let total;
 let clearDisplay = false;
 let operatorClicked = false;
-// let isEqualsClicked = false;
+let isEqualsClicked = false;
 
 let operatorBtns = document.querySelectorAll('.operator');
 let displayText = document.querySelector('#display-text');
@@ -15,18 +15,14 @@ let numBtns = document.querySelectorAll('.num-btn');
 selectedNum();
 allClear();
 operatorIsClicked();
-// equalsBtnClick();
+equalsBtnClick();
 
-
-// Run calculation
+// Calculation functions
 
 function calculate(num1, num2, callback) {
   return callback(num1, num2);
   
 }
-
-
-// Create functions for each of the operations
 
 function add(num1, num2) {
   return num1 + num2;
@@ -66,6 +62,7 @@ function insertDisplayText() {
   }
   updateDisplayValue();
   operatorClicked = false;
+  isEqualsClicked = false;
   console.log(displayValue, 'display value');
 }
 
@@ -90,15 +87,21 @@ function allClear() {
  
 }
 
-// Operation functionality
+
+// Operator functionality
+
 function operatorIsClicked() {
   let containerDiv = document.querySelector('#calc-container');
   containerDiv.addEventListener('click', (e) => {
     const target = e.target;
+    if(target.id !== 'equals-btn') {
+      isEqualsClicked = false;
+    }
     if(target.className === 'operator') {
-      if(operatorClicked) {
+      if(!isNaN(secondNum) && operator && isEqualsClicked) {
+        runEquation();
+      } else if(operatorClicked) {
         assignOperatorValues(target);
-        return;
       } else {
         assignNumberValues();
         assignOperatorValues(target);
@@ -114,9 +117,8 @@ function operatorIsClicked() {
 }
 
 
+// Assign number values and operators
 
-// Assign number values
-// EDIT THIS ///////////////////////////////////////
 function assignNumberValues() {
   if(!isNaN(firstNum)) {
     secondNum = displayValue;
@@ -132,16 +134,15 @@ function assignNumberValues() {
 
 
 function assignOperatorValues(target) {
-      operator = nextOperator;
-      nextOperator = window[target.value];
-  
-  
-// Operator = nextOperator, unless operator and nextOperator are undefined
+  operator = nextOperator;
+  nextOperator = window[target.value];
 
   console.log(operator, 'operator');
   console.log(nextOperator, 'nextOperator');
 }
 
+
+// Run calculation and display total
 
 function runEquation() {
   total = calculate(firstNum, secondNum, operator);
@@ -150,19 +151,16 @@ function runEquation() {
   firstNum = total;
 }
 
+function equalsBtnClick() {
+  let equalsBtn = document.querySelector('#equals-btn');
+  equalsBtn.addEventListener('click', () => isEqualsClicked = true)
+}
 
 
-// function equalsBtnClick() {
-//   let equalsBtn = document.querySelector('#equals-btn');
-//   equalsBtn.addEventListener('click', () => isEqualsClicked = true)
-// }
+
 
 // TO DO
-// Make equation run if equals is clicked more than once
 
 // Allow negative numbers
-
-// When two operators are clicked in a row (no number),
-// how to store only the second operator? (firstNum is being stored as secondNum currently)
 
 // Change font size at different numbers of digits, add error if number gets too long
