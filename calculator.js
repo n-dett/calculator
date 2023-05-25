@@ -7,15 +7,19 @@ let total;
 let clearDisplay = false;
 let operatorClicked = false;
 let isEqualsClicked = false;
+let currentBtn;
+let lastBtn;
 
 let operatorBtns = document.querySelectorAll('.operator');
 let displayText = document.querySelector('#display-text');
 let numBtns = document.querySelectorAll('.num-btn');
 
+// plusMinusBtnClick();
 selectedNum();
 allClear();
 operatorIsClicked();
-equalsBtnClick();
+whichBtnClicked();
+
 
 // Calculation functions
 
@@ -93,27 +97,30 @@ function allClear() {
 function operatorIsClicked() {
   let containerDiv = document.querySelector('#calc-container');
   containerDiv.addEventListener('click', (e) => {
+    console.log(currentBtn, 'current btn');
+    console.log(lastBtn, 'last btn');
     const target = e.target;
-    if(target.id !== 'equals-btn') {
-      isEqualsClicked = false;
-    }
     if(target.className === 'operator') {
-      if(!isNaN(secondNum) && operator && isEqualsClicked) {
-        runEquation();
-      } else if(operatorClicked) {
-        assignOperatorValues(target);
-      } else {
-        assignNumberValues();
-        assignOperatorValues(target);
-        clearDisplay = true;
-        operatorClicked = true;
+      whenOperatorIsClicked(target);
+    } 
+  })                
+}
 
-          if(!isNaN(secondNum) && operator) {
-            runEquation(); 
-          }
-      }
-    }                
-  })
+function whenOperatorIsClicked(target) {
+  if(currentBtn === 'equals' && lastBtn === 'equals') {
+    runEquation();
+  } else if(operatorClicked) {
+      assignOperatorValues(target);
+  } else {
+      assignNumberValues();
+      assignOperatorValues(target);
+      clearDisplay = true;
+      operatorClicked = true;
+
+        if(!isNaN(secondNum) && operator) {
+          runEquation(); 
+        }
+  }
 }
 
 
@@ -151,16 +158,39 @@ function runEquation() {
   firstNum = total;
 }
 
-function equalsBtnClick() {
-  let equalsBtn = document.querySelector('#equals-btn');
-  equalsBtn.addEventListener('click', () => isEqualsClicked = true)
-}
+function whichBtnClicked() {
+  let buttons = document.querySelectorAll('button');
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      if(currentBtn) {
+      lastBtn = currentBtn;
+      } 
+      currentBtn = button.value;
+    })
+  })  
+}    
 
 
+// function plusMinusBtnClick() {
+//   let plusMinusBtn = document.querySelector('#plus-minus-btn');
+//   plusMinusBtn.addEventListener('click', () => {
+//     displayValue *= -1;
+//     displayText.innerText = displayValue;
+ 
+//   })
+// }
 
 
 // TO DO
 
+// Equals click got messed up
+// If equals is clicked twice in a row, operator stays the same, firstNum is total,
+// secondNum is target
+
 // Allow negative numbers
 
+// If a number is clicked after equals, what happens?
+
 // Change font size at different numbers of digits, add error if number gets too long
+
+// Condense functions where possible
