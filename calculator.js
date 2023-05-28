@@ -14,7 +14,7 @@ let operatorBtns = document.querySelectorAll('.operator');
 let displayText = document.querySelector('#display-text');
 let numBtns = document.querySelectorAll('.num-btn');
 
-// plusMinusBtnClick();
+plusMinusBtnClick();
 selectedNum();
 allClear();
 operatorIsClicked();
@@ -155,6 +155,7 @@ function runEquation() {
   total = calculate(firstNum, secondNum, operator);
   console.log(total, 'total');
   displayText.innerText = total;
+  displayValue = total;
   firstNum = total;
 }
 
@@ -171,21 +172,19 @@ function whichBtnClicked() {
 }    
 
 
-// function plusMinusBtnClick() {
-//   let plusMinusBtn = document.querySelector('#plus-minus-btn');
-//   plusMinusBtn.addEventListener('click', () => {
-//     displayValue *= -1;
-//     displayText.innerText = displayValue;
- 
-//   })
-// }
+function plusMinusBtnClick() {
+  let plusMinusBtn = document.querySelector('#plus-minus-btn');
+  plusMinusBtn.addEventListener('click', () => {
+    displayValue *= -1;
+    displayText.innerText = displayValue;
+    if(currentBtn === 'equals') {
+      total = displayValue;
+    }
+  })
+}
 
 
 // TO DO
-
-// Equals click got messed up
-// If equals is clicked twice in a row, operator stays the same, firstNum is total,
-// secondNum is target
 
 // Allow negative numbers
 
