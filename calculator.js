@@ -13,12 +13,14 @@ let lastBtn;
 let operatorBtns = document.querySelectorAll('.operator');
 let displayText = document.querySelector('#display-text');
 let numBtns = document.querySelectorAll('.num-btn');
+let containerDiv = document.querySelector('#calc-container');
 
 plusMinusBtnClick();
 selectedNum();
 allClear();
 operatorIsClicked();
 whichBtnClicked();
+startNewEquation();
 
 
 // Calculation functions
@@ -75,27 +77,12 @@ function updateDisplayValue() {
 }
 
 
-// All clear button
 
-function allClear() {
-  let acBtn = document.querySelector('#ac-btn');
-  acBtn.addEventListener('click', () => {
-    displayText.innerText = '0'
-    displayValue = 0;
-    total = 0;
-    firstNum = undefined;
-    secondNum = undefined;
-    operator = undefined;
-    nextOperator = undefined;
-  })
- 
-}
 
 
 // Operator functionality
 
 function operatorIsClicked() {
-  let containerDiv = document.querySelector('#calc-container');
   containerDiv.addEventListener('click', (e) => {
     console.log(currentBtn, 'current btn');
     console.log(lastBtn, 'last btn');
@@ -155,7 +142,7 @@ function runEquation() {
   total = calculate(firstNum, secondNum, operator);
   console.log(total, 'total');
   displayText.innerText = total;
-  displayValue = total;
+  updateDisplayValue();
   firstNum = total;
 }
 
@@ -172,6 +159,22 @@ function whichBtnClicked() {
 }    
 
 
+function startNewEquation() {
+  containerDiv.addEventListener('click', (e) => {
+    if(!isNaN(currentBtn) && lastBtn === 'equals') {
+      let target = e.target;
+      displayText.innerText = target.value;
+      updateDisplayValue();
+      firstNum = undefined;
+      total = undefined;
+      assignNumberValues();
+    }
+  })
+}
+
+
+// Plus/minus button
+
 function plusMinusBtnClick() {
   let plusMinusBtn = document.querySelector('#plus-minus-btn');
   plusMinusBtn.addEventListener('click', () => {
@@ -184,11 +187,27 @@ function plusMinusBtnClick() {
 }
 
 
+// All clear button
+
+function allClear() {
+  let acBtn = document.querySelector('#ac-btn');
+  acBtn.addEventListener('click', () => {
+    displayText.innerText = '0'
+    displayValue = 0;
+    total = 0;
+    firstNum = undefined;
+    secondNum = undefined;
+    operator = undefined;
+    nextOperator = undefined;
+  })
+ 
+}
+
+
 // TO DO
 
-// Allow negative numbers
-
 // If a number is clicked after equals, what happens?
+// If last button is equals and current button is a number, displayValue = btn.value
 
 // Change font size at different numbers of digits, add error if number gets too long
 
