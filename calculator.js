@@ -206,11 +206,13 @@ function allClear() {
 
 // TO DO
 
-// After clicking equals then all clear, display is undefined but needs to be 0
-
 // Change font size at different numbers of digits, add error if number gets too long
 // Round answers with long decimals so that they don’t overflow the screen
 
-// Display a snarky error message if the user tries to divide by 0
+// Decimal button functionality
+
+// Clear entry button functionality
+
+// Add keyboard support?
 
 // Condense functions where possible
