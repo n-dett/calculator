@@ -74,6 +74,7 @@ function insertDisplayText() {
 
 function updateDisplayValue() {
   displayValue = Number(displayText.innerText);
+  // displayValue = +displayValue.toFixed(8);
 }
 
 
@@ -140,6 +141,7 @@ function assignOperatorValues(target) {
 
 function runEquation() {
   total = calculate(firstNum, secondNum, operator);
+  total = +total.toFixed(8);
   console.log(total, 'total');
   displayText.innerText = total;
   updateDisplayValue();
@@ -208,6 +210,7 @@ function allClear() {
 
 // Change font size at different numbers of digits, add error if number gets too long
 // Round answers with long decimals so that they don’t overflow the screen
+// Maximum 8 decimal places for now
 
 // Decimal button functionality
 
