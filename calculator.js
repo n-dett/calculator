@@ -21,6 +21,7 @@ allClear();
 operatorIsClicked();
 whichBtnClicked();
 startNewEquation();
+decimalButton();
 
 
 // Calculation functions
@@ -74,7 +75,6 @@ function insertDisplayText() {
 
 function updateDisplayValue() {
   displayValue = Number(displayText.innerText);
-  // displayValue = +displayValue.toFixed(8);
 }
 
 
@@ -205,17 +205,30 @@ function allClear() {
  
 }
 
+// Decimal button
+
+function decimalButton() {
+  let decimalBtn = document.querySelector('#decimal-btn');
+  decimalBtn.addEventListener('click', () => {
+    if(displayText.innerText.includes('.')){
+      return;
+    } else {
+      displayText.innerText += '.';
+    }
+  })
+}
+
 
 // TO DO
 
-// Change font size at different numbers of digits, add error if number gets too long
-// Round answers with long decimals so that they don’t overflow the screen
-// Maximum 8 decimal places for now
-
-// Decimal button functionality
+// Decimal button functionality: limit to one decimal point
 
 // Clear entry button functionality
 
 // Add keyboard support?
 
 // Condense functions where possible
+
+// Change font size at different numbers of digits, add error if number gets too long
+// Round answers with long decimals so that they don’t overflow the screen
+// Maximum 8 decimal places for now
