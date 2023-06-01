@@ -22,6 +22,7 @@ operatorIsClicked();
 whichBtnClicked();
 startNewEquation();
 decimalButton();
+clearEntry();
 
 
 // Calculation functions
@@ -189,7 +190,21 @@ function plusMinusBtnClick() {
 }
 
 
-// All clear button
+// Decimal button
+
+function decimalButton() {
+  let decimalBtn = document.querySelector('#decimal-btn');
+  decimalBtn.addEventListener('click', () => {
+    if(displayText.innerText.includes('.')){
+      return;
+    } else {
+      displayText.innerText += '.';
+    }
+  })
+}
+
+
+// AC button
 
 function allClear() {
   let acBtn = document.querySelector('#ac-btn');
@@ -205,23 +220,25 @@ function allClear() {
  
 }
 
-// Decimal button
 
-function decimalButton() {
-  let decimalBtn = document.querySelector('#decimal-btn');
-  decimalBtn.addEventListener('click', () => {
-    if(displayText.innerText.includes('.')){
-      return;
+// C button
+
+function clearEntry() {
+  let clearEntryBtn = document.querySelector('#ce-btn');
+  clearEntryBtn.addEventListener('click', () => {
+    if(lastBtn.className !== 'operator'){
+    displayText.innerText = 0;
+    updateDisplayValue();
     } else {
-      displayText.innerText += '.';
+        nextOperator = undefined;
     }
   })
 }
 
 
-// TO DO
 
-// Decimal button functionality: limit to one decimal point
+
+// TO DO
 
 // Clear entry button functionality
 
