@@ -61,7 +61,7 @@ function insertDisplayText() {
   if(displayText.innerText == '0') {
     displayText.innerText = '';
   }
-  if(displayText.innerText.length <= 9){
+  if(displayText.innerText.length <= 14){
     if(clearDisplay === true) {
       displayText.innerText = '';
       clearDisplay = false;
@@ -76,6 +76,7 @@ function insertDisplayText() {
 
 function updateDisplayValue() {
   displayValue = Number(displayText.innerText);
+  scaleFontSize();
 }
 
 
@@ -96,7 +97,7 @@ function operatorIsClicked() {
 }
 
 function whenOperatorIsClicked(target) {
-  if(currentBtn === 'equals' && lastBtn === 'equals') {
+  if(currentBtn === 'equals' && lastBtn === 'equals' && displayValue !== 'ERR') {
     runEquation();
   } else if(operatorClicked) {
       assignOperatorValues(target);
@@ -142,7 +143,7 @@ function assignOperatorValues(target) {
 
 function runEquation() {
   total = calculate(firstNum, secondNum, operator);
-  total = +total.toFixed(8);
+  total = +total.toFixed(15);
   console.log(total, 'total');
   displayText.innerText = total;
   updateDisplayValue();
@@ -197,6 +198,8 @@ function decimalButton() {
   decimalBtn.addEventListener('click', () => {
     if(displayText.innerText.includes('.')){
       return;
+    } else if(displayValue === 'ERR') {
+      displayText.innerText = '0.'
     } else {
       displayText.innerText += '.';
     }
@@ -235,17 +238,46 @@ function clearEntry() {
   })
 }
 
+// Scale font size
 
+function scaleFontSize() {
+  if(displayText.innerText.length <= 10){
+    displayText.style.fontSize = '61px';
+  } else if(displayText.innerText.length === 11){
+    displayText.style.fontSize = '55px';
+  } else if(displayText.innerText.length == 12){
+    displayText.style.fontSize = '52px';
+  }else if(displayText.innerText.length === 13){
+    displayText.style.fontSize = '49px';
+  } else if(displayText.innerText.length == 14){
+    displayText.style.fontSize = '45px';
+  } else if(displayText.innerText.length == 15){
+    displayText.style.fontSize = '43px';
+  } 
+  else if(displayText.innerText.length > 15){
+    displayText.style.fontSize = '61px';
+    calcErr();
+  }
+}
+
+function calcErr() {
+  displayText.innerText = 'ERR';
+    displayValue = 'ERR';
+    firstNum = undefined;
+    secondNum = undefined;
+    total = undefined;
+}
 
 
 // TO DO
 
-// Clear entry button functionality
+// Change font size at different numbers of digits (for both entry and answer),
+// Add error if number gets too long
+// Round answers with long decimals so that they don’t overflow the screen
+// Maximum 8 decimal places for now
+
+// Make display fixed height
 
 // Add keyboard support?
 
 // Condense functions where possible
-
-// Change font size at different numbers of digits, add error if number gets too long
-// Round answers with long decimals so that they don’t overflow the screen
-// Maximum 8 decimal places for now
