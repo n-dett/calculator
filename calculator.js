@@ -25,6 +25,8 @@ decimalButton();
 clearEntry();
 
 
+
+
 // Calculation functions
 
 function calculate(num1, num2, callback) {
@@ -69,6 +71,7 @@ function insertDisplayText() {
     displayText.innerText += this.value;
   }
   updateDisplayValue();
+  operatorBtns.disabled = false;
   operatorClicked = false;
   isEqualsClicked = false;
   console.log(displayValue, 'display value');
@@ -142,12 +145,20 @@ function assignOperatorValues(target) {
 // Run calculation and display total
 
 function runEquation() {
-  total = calculate(firstNum, secondNum, operator);
-  total = +total.toFixed(15);
-  console.log(total, 'total');
-  displayText.innerText = total;
-  updateDisplayValue();
-  firstNum = total;
+  total = calculate(firstNum, secondNum, operator).toString();
+  if(total.length > 15 && !total.includes('.')) {
+    calcErr();
+  } else if(isNaN(total)) {
+      calcErr();
+  } else {
+      total = total.slice(0, 15);
+      total = +total;
+      console.log(total, 'total');
+      displayText.innerText = total;
+      updateDisplayValue();
+      firstNum = total;
+  }
+  
 }
 
 function whichBtnClicked() {
@@ -244,40 +255,38 @@ function scaleFontSize() {
   if(displayText.innerText.length <= 10){
     displayText.style.fontSize = '61px';
   } else if(displayText.innerText.length === 11){
-    displayText.style.fontSize = '55px';
+      displayText.style.fontSize = '55px';
   } else if(displayText.innerText.length == 12){
-    displayText.style.fontSize = '52px';
+      displayText.style.fontSize = '52px';
   }else if(displayText.innerText.length === 13){
-    displayText.style.fontSize = '49px';
+      displayText.style.fontSize = '49px';
   } else if(displayText.innerText.length == 14){
-    displayText.style.fontSize = '45px';
+      displayText.style.fontSize = '45px';
   } else if(displayText.innerText.length == 15){
-    displayText.style.fontSize = '43px';
-  } 
-  else if(displayText.innerText.length > 15){
-    displayText.style.fontSize = '61px';
-    calcErr();
+      displayText.style.fontSize = '43px';
+  } else if(displayText.innerText.length > 15){
+      displayText.style.fontSize = '61px';
+      calcErr();
   }
 }
 
 function calcErr() {
   displayText.innerText = 'ERR';
-    displayValue = 'ERR';
-    firstNum = undefined;
-    secondNum = undefined;
-    total = undefined;
+  updateDisplayValue();
+  operatorBtns.disabled = true;
+  firstNum = undefined;
+  secondNum = undefined;
+  total = undefined;
 }
+
+
+
+
+
 
 
 // TO DO
 
-// Change font size at different numbers of digits (for both entry and answer),
-// Add error if number gets too long
-// Round answers with long decimals so that they don’t overflow the screen
-// Maximum 8 decimal places for now
-
-// Make display fixed height
-
-// Add keyboard support?
+// Allow decimal to be entered on second number
 
 // Condense functions where possible
