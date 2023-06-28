@@ -279,14 +279,3 @@ function calcErr() {
   total = undefined;
 }
 
-
-
-
-
-
-
-// TO DO
-
-// Allow decimal to be entered on second number
-
-// Condense functions where possible
