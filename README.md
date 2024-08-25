@@ -1,5 +1,5 @@
 # Calculator
-**Live preview:** https://n-dett.github.io/calculator/
+**Live preview:** https://n-dett.github.io/calculator/ (Not optimized for mobile)
 
 ![calculator-2](https://github.com/n-dett/calculator/assets/124851780/bac3ba67-053c-4240-a190-eef5794c7f8a)
 
