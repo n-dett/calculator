@@ -55,6 +55,7 @@ button {
     background-color: rgb(218, 212, 45);
     font-family: 'Public Sans', sans-serif;
     cursor: pointer;
+    color: black !important;
 }
 
 button:active {
