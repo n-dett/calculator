@@ -57,6 +57,9 @@ button {
     color: black !important;
     flex: 1;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 button:active {
@@ -76,7 +79,7 @@ button:hover {
     width: calc(50% - 7px);
 }
 
-#ac-btn, #ce-btn, #delete-btn {
+#ac-btn, #ce-btn{
     font-size: 30px;
 }
 
@@ -86,7 +89,7 @@ button:hover {
 
 @media (max-width: 500px) {
     #calc-container {
-        max-width: 90%;
+        max-width: 95%;
         gap: 5px;
         padding: 3%;
     }
@@ -103,7 +106,7 @@ button:hover {
         width: calc(50% - 5px);
     }
 
-    #ac-btn, #ce-btn, #delete-btn {
+    #ac-btn, #ce-btn{
         font-size: 24px;
     }
   }
