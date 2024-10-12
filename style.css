@@ -82,3 +82,15 @@ button:hover {
 .operator {
     background-color: rgb(255, 111, 86);
 }
+
+@media (max-width: 500px) {
+    #calc-container {
+        max-width: 80%;
+        gap: 5px;
+        padding: 3%;
+    }
+
+    button {
+        height: 75px;
+    }
+  }
