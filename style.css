@@ -109,4 +109,12 @@ button:hover {
     #plus-minus{
         font-size: 24px;
     }
+
+    button:hover {
+        background-color: initial;
+    }
+
+    .operator:hover {
+        background-color: initial;
+    }
   }
