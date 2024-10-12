@@ -111,10 +111,10 @@ button:hover {
     }
 
     button:hover {
-        background-color: initial;
+        background-color: rgb(218, 212, 45);
     }
 
     .operator:hover {
-        background-color: initial;
+        background-color: rgb(255, 111, 86);
     }
   }
