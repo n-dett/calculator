@@ -106,7 +106,7 @@ button:hover {
         width: calc(50% - 5px);
     }
 
-    #ac-btn, #ce-btn{
+    #plus-minus{
         font-size: 24px;
     }
   }
