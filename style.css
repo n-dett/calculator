@@ -2,6 +2,12 @@
     box-sizing: border-box;  
 }
 
+html {
+    touch-action: manipulation; /* Disable the double-tap zoom behavior */
+    -webkit-tap-highlight-color: transparent; /* Remove the flash around the button */
+}
+
+
 body {
     display: flex;
     align-items: center;
@@ -63,8 +69,8 @@ button {
 }
 
 button:active {
-    padding-top: 4px;
-    padding-left: 7px;
+        transform: scale(0.98);
+        box-shadow: none;     
 }
 
 button:hover {
@@ -96,10 +102,6 @@ button:hover {
 
     button {
         height: 75px;
-    }
-
-    button:active {
-        padding: 0;
     }
 
     #equals-btn {
