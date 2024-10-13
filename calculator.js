@@ -252,13 +252,17 @@ function clearEntry() {
 // Scale font size
 
 function scaleFontSize() {
-  if(displayText.innerText.length <= 10){
+  if(displayText.innerText.length > 8 && window.innerWidth < 320){
+    displayText.style.fontSize = '61px';
+    calcErr();
+  }
+  else if(displayText.innerText.length <= 10){
     displayText.style.fontSize = '61px';
   } else if(displayText.innerText.length === 11){
       displayText.style.fontSize = '55px';
   } else if(displayText.innerText.length == 12){
       displayText.style.fontSize = '52px';
-  }else if(displayText.innerText.length === 13){
+  } else if(displayText.innerText.length === 13){
       displayText.style.fontSize = '49px';
   } else if(displayText.innerText.length == 14){
       displayText.style.fontSize = '45px';
