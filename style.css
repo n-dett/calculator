@@ -110,6 +110,9 @@ button:hover {
         font-size: 24px;
     }
 
+  }
+
+  @media (pointer: coarse) {
     button:hover {
         background-color: rgb(218, 212, 45);
     }
@@ -117,4 +120,4 @@ button:hover {
     .operator:hover {
         background-color: rgb(255, 111, 86);
     }
-  }
+}
